@@ -96,7 +96,7 @@ export function CustomCursor() {
     let id = 0;
     const handler = (e: MouseEvent) => {
       setPos({ x: e.clientX, y: e.clientY });
-      setTrail((prev) => [...prev.slice(-12), { id: id++, x: e.clientX, y: e.clientY }]);
+      setTrail((prev) => [...prev.slice(-6), { id: id++, x: e.clientX, y: e.clientY }]);
     };
     window.addEventListener("mousemove", handler);
     return () => window.removeEventListener("mousemove", handler);

@@ -57,7 +57,7 @@ export function EndingScene() {
       <NightSky />
       <FloatingLanterns />
       <FloatingParticles type="stars" count={20} />
-      <FloatingParticles type="hearts" count={15} />
+      <FloatingParticles type="hearts" count={5} />
       <FloatingParticles type="petals" count={10} />
 
       <div className="relative z-20 mx-auto flex min-h-screen max-w-3xl flex-col items-center justify-center px-6 py-20 text-center">
