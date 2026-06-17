@@ -2,14 +2,14 @@ import { useRef, useState } from "react";
 import { motion, AnimatePresence, useMotionValue, useTransform } from "framer-motion";
 import { FloatingParticles, Sparkles } from "./Atmosphere";
 
-// To add real photos, drop them in /public/gallery/ and update PHOTOS below.
+// Photos are served from /public/gallery/
 const PHOTOS = [
-  { id: 1, color: "from-pink-300 to-rose-400", label: "Memory 1" },
-  { id: 2, color: "from-rose-300 to-pink-500", label: "Memory 2" },
-  { id: 3, color: "from-fuchsia-300 to-rose-400", label: "Memory 3" },
-  { id: 4, color: "from-pink-400 to-amber-300", label: "Memory 4" },
-  { id: 5, color: "from-rose-200 to-pink-400", label: "Memory 5" },
-  { id: 6, color: "from-pink-300 to-fuchsia-400", label: "Memory 6" },
+  { id: 1, src: "/gallery/som1.jpeg", color: "from-pink-300 to-rose-400", label: "Always Smiling 🌸" },
+  { id: 2, src: "/gallery/som2.jpeg", color: "from-rose-300 to-pink-500", label: "Peek-a-boo ✨" },
+  { id: 3, src: "/gallery/som3.jpeg", color: "from-fuchsia-300 to-rose-400", label: "Traditions & Grace 🌹" },
+  { id: 4, src: "/gallery/som4.jpeg", color: "from-pink-400 to-amber-300", label: "Lost in Thought 🌿" },
+  { id: 5, src: "/gallery/som5.jpeg", color: "from-rose-200 to-pink-400", label: "Festival Vibes 🦋" },
+  { id: 6, src: "/gallery/som6.jpeg", color: "from-pink-300 to-fuchsia-400", label: "Golden Hour ☀️" },
 ];
 
 const POSITIONS = [
@@ -157,12 +157,26 @@ function PhotoSurface({ photo, large }: { photo: typeof PHOTOS[number]; large?: 
     <div
       className={`relative overflow-hidden rounded-xl bg-gradient-to-br ${photo.color} ${large ? "h-[60vh] w-[80vw] max-w-[600px]" : "h-56 w-44"}`}
     >
-      <div className="absolute inset-0 flex items-center justify-center">
-        <span className={`font-display italic text-white/90 ${large ? "text-4xl" : "text-xl"}`}>
+      {photo.src ? (
+        <img
+          src={photo.src}
+          alt={photo.label}
+          className="absolute inset-0 h-full w-full object-cover"
+          draggable={false}
+        />
+      ) : (
+        <div className="absolute inset-0 flex items-center justify-center">
+          <span className={`font-display italic text-white/90 ${large ? "text-4xl" : "text-xl"}`}>
+            {photo.label}
+          </span>
+        </div>
+      )}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+      <div className="absolute bottom-2 left-0 right-0 text-center">
+        <span className={`font-display italic text-white drop-shadow ${large ? "text-2xl" : "text-sm"}`}>
           {photo.label}
         </span>
       </div>
-      <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
       <div className="absolute top-2 right-2 text-xl">🌹</div>
     </div>
   );

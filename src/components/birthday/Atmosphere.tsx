@@ -12,11 +12,11 @@ interface Particle {
 
 const EMOJI_MAP: Record<string, string[]> = {
   petals: ["🌸", "🌺", "🌷"],
-  hearts: ["💗", "💖", "💕", "💝"],
+  hearts: ["💖"],
   sparkles: ["✨", "⭐", "💫"],
   butterflies: ["🦋"],
   roses: ["🌹", "🌸"],
-  mixed: ["🌸", "💗", "✨", "🦋", "🌹", "💖", "⭐"],
+  mixed: ["🌸", "✨", "🦋", "🌹", "⭐"],
   stars: ["⭐", "✨", "💫", "🌟"],
 };
 
@@ -116,14 +116,14 @@ export function CustomCursor() {
             transition: "opacity 0.3s",
           }}
         >
-          {i % 2 === 0 ? "✨" : "💗"}
+          {i % 2 === 0 ? "✨" : "🌸"}
         </div>
       ))}
       <div
         className="absolute -translate-x-1/2 -translate-y-1/2 text-2xl"
         style={{ left: pos.x, top: pos.y, filter: "drop-shadow(0 0 10px #ff69b4)" }}
       >
-        💖
+        💫
       </div>
     </div>
   );
@@ -238,7 +238,7 @@ export function FloatingLanterns() {
 export function BeatingHeart() {
   return (
     <div className="relative flex items-center justify-center">
-      <div className="animate-heartbeat text-[180px] leading-none" style={{ filter: "drop-shadow(0 0 40px #ff1493)" }}>
+      <div className="animate-heartbeat text-[100px] leading-none" style={{ filter: "drop-shadow(0 0 20px #ff69b4)" }}>
         ❤️
       </div>
       <div className="absolute font-display text-sm font-bold text-white tracking-wider">

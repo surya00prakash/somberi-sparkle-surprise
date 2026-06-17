@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { AnimatedPinkBackground, FloatingParticles, Sparkles } from "./Atmosphere";
+import { playSlice } from "@/hooks/useSoundEffects";
 
 export function CakeScene({ onComplete }: { onComplete: () => void }) {
   const [stage, setStage] = useState<"idle" | "cutting" | "revealed">("idle");
 
   const cut = async () => {
     if (stage !== "idle") return;
+    playSlice();
     setStage("cutting");
     const confetti = (await import("canvas-confetti")).default;
     const burst = () => {

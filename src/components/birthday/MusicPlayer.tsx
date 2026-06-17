@@ -1,18 +1,19 @@
 import { useEffect, useRef, useState } from "react";
 import { Music, Pause, Play, Volume2, VolumeX } from "lucide-react";
 
-// To add your own songs: drop MP3 files into /public/music/ and list them below.
 const PLAYLIST = [
-  { title: "Add your song", src: "/music/song1.mp3" },
+  { title: "song1", src: "/music/song1.mp3" },
 ];
 
-export function MusicPlayer({ enabled }: { enabled: boolean }) {
+// stage passed from App — music only starts from page 2 onwards
+export function MusicPlayer({ enabled, stage }: { enabled: boolean; stage: string }) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [playing, setPlaying] = useState(false);
   const [muted, setMuted] = useState(false);
   const [volume, setVolume] = useState(0.5);
   const [track] = useState(0);
   const fadeRef = useRef<number | null>(null);
+  const startedRef = useRef(false);
 
   useEffect(() => {
     const audio = new Audio(PLAYLIST[track].src);
@@ -42,16 +43,18 @@ export function MusicPlayer({ enabled }: { enabled: boolean }) {
     }, ms / steps);
   };
 
+  // Only auto-start when we reach page 2+ (not on cake page)
   useEffect(() => {
+    if (!enabled || startedRef.current) return;
+    if (stage === "cake") return; // wait until after cake page
     const audio = audioRef.current;
     if (!audio) return;
-    if (enabled && !playing) {
-      audio.play().then(() => {
-        setPlaying(true);
-        fadeTo(muted ? 0 : volume);
-      }).catch(() => {});
-    }
-  }, [enabled, playing, muted, volume]);
+    startedRef.current = true;
+    audio.play().then(() => {
+      setPlaying(true);
+      fadeTo(muted ? 0 : volume);
+    }).catch(() => {});
+  }, [enabled, stage, muted, volume]);
 
   const toggle = () => {
     const audio = audioRef.current;
