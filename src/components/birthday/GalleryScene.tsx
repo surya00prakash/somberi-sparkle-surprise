@@ -30,7 +30,7 @@ export function GalleryScene({ onComplete }: { onComplete: () => void }) {
     }}>
       <Sparkles count={50} />
       <FloatingParticles type="petals" count={15} />
-      <FloatingParticles type="hearts" count={10} />
+
 
       <div className="relative z-10 mx-auto max-w-6xl px-6 text-center">
         <motion.h2
